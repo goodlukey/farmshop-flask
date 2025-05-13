@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}小農市集資訊{% endblock %}
+{% block content %}
+<h1>🌾 小農市集資訊</h1>
+<p>歡迎蒞臨以下小農市集，支持在地農友！</p>
+
+{% for market in markets %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <h2>{{ market.name }}</h2>
+        <p>📍 地點：{{ market.location }}</p>
+        <p>🗓️ 時間：{{ market.date }}</p>
+        <p><a href="{{ market.link }}" target="_blank">🔗 地圖位置</a></p>
+        <form action="{{ url_for('delete_market', market_id=market.id) }}" method="POST" onsubmit="return confirm('確定要刪除這個市集嗎？');">
+            <button type="submit">🗑 刪除</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}
